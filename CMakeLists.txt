@@ -21,7 +21,7 @@ HunterGate(
 )
 
 # TODO: rename project and delete this comment
-project(template VERSION 0.1.0)
+project(lab6 VERSION 0.1.0)
 string(APPEND CMAKE_CXX_FLAGS " -pedantic -Werror -Wall -Wextra")
 string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
 string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
@@ -35,23 +35,22 @@ find_package(Boost 1.72.0 CONFIG REQUIRED log)
 hunter_add_package(nlohmann_json)
 find_package(nlohmann_json 3.1.4 CONFIG REQUIRED)
 
-add_library(${PROJECT_NAME} STATIC
+#add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/CPP.cpp
-)
-
-#add_executable(demo
- #${CMAKE_CURRENT_SOURCE_DIR}/sources/CPP.cpp
+  #${CMAKE_CURRENT_SOURCE_DIR}/sources/CPP.cpp
 #)
 
-target_include_directories(${PROJECT_NAME} PUBLIC
-  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-  "$<INSTALL_INTERFACE:include>"
+add_executable(CPP
+ ${CMAKE_CURRENT_SOURCE_DIR}/sources/CPP.cpp
+)
+
+target_include_directories(CPP
+  PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 #target_link_libraries(demo ${PROJECT_NAME})
 
-target_link_libraries(${PROJECT_NAME} Boost::log)
+target_link_libraries(CPP Boost::log)
 
 #if(BUILD_TESTS)
   #add_executable(tests
@@ -70,7 +69,7 @@ if(BUILD_COVERAGE)
   string(APPEND CMAKE_CXX_FLAGS " --coverage")
   add_coverage(${PROJECT_NAME})
   #add_coverage(tests)
-  coverage_evaluate()
+  #coverage_evaluate()
 endif()
 
 if(BUILD_DOCS)
